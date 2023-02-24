@@ -7,16 +7,22 @@ let STATE = {
       a: null,
       b: null,
       c: null,
+      d: null,
+      e: null,
     },
     {
       a: null,
       b: null,
       c: null,
+      d: null,
+      e: null,
     },
     {
       a: null,
       b: null,
       c: null,
+      d: null,
+      e: null,
     },
   ],
 };

@@ -67,7 +67,7 @@ const DisplayBoard = (board) => {
 const RunApp = async (dimension = 3) => {
   let State = CreateState(dimension);
 
-  State.currentPlayer = "X";
+  State.currentPlayer = ["X", "O"][Math.floor(Math.random() * 2)];
   var i = 1;
 
   while (State.winner === null && !State.isDraw) {

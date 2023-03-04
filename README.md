@@ -51,6 +51,9 @@ The default board size is 3x3, but you can change this by passing an argument to
 RunApp(5);
 ```
 
+![screen](https://user-images.githubusercontent.com/6079978/222897112-c8f5533d-02ef-43a2-9d75-d7faa5c5506b.gif)
+
+
 ## Conclusion
 
 In conclusion, this Tic Tac Toe game project demonstrates the implementation of several functional programming concepts. The use of pure functions, immutable data, higher-order functions, recursion, and declarative code makes the game code more readable, maintainable, and less prone to errors.

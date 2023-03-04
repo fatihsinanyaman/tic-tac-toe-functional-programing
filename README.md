@@ -2,7 +2,11 @@
 
 ## Tic-Tac-Toe Game
 
-This is a simple implementation of a Tic-Tac-Toe game using functional programming concepts in JavaScript. The game has been implemented in a purely functional way, avoiding any state mutation, loops, and side-effects.
+This is a simple implementation of a Tic-Tac-Toe game using functional programming concepts in JavaScript. The game has been implemented in a purely functional way, avoiding any state mutation and side-effects.
+
+## Demo
+
+You can try a [live demo](https://playcode.io/1260815) of the app.
 
 ## Features
 
@@ -52,7 +56,6 @@ RunApp(5);
 ```
 
 ![screen](https://user-images.githubusercontent.com/6079978/222897112-c8f5533d-02ef-43a2-9d75-d7faa5c5506b.gif)
-
 
 ## Conclusion
 

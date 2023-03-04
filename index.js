@@ -1,31 +1,11 @@
-let STATE = {
+const CreateState = (dimension) => ({
   currentPlayer: null,
   winner: null,
   isDraw: false,
-  board: [
-    {
-      a: null,
-      b: null,
-      c: null,
-      d: null,
-      e: null,
-    },
-    {
-      a: null,
-      b: null,
-      c: null,
-      d: null,
-      e: null,
-    },
-    {
-      a: null,
-      b: null,
-      c: null,
-      d: null,
-      e: null,
-    },
-  ],
-};
+  board: Array.from({ length: dimension }, () =>
+    Array.from({ length: dimension }, () => null)
+  ),
+});
 
 const Move = (STATE, { x, y }) => {
   if (STATE.board[y][x] !== null) {
@@ -52,24 +32,21 @@ const CheckFinish = (board, currentPlayer) =>
   CrossCheck([...board].reverse(), currentPlayer);
 
 const CrossCheck = (board, currentPlayer) =>
-  Object.keys(board).every(
-    (_, _i) => Object.values(board[_i])[_i] === currentPlayer
-  );
+  [...board.keys()].every((_, _i) => board[_i][_i] === currentPlayer);
 
 const VerticalCheck = (board, currentPlayer) =>
-  Object.keys(board[0]).some((_c) =>
-    Object.keys(board).every((_i) => board[_i][_c] === currentPlayer)
+  [...board.keys()].some((_c) =>
+    [...board.keys()].every((_i) => board[_i][_c] === currentPlayer)
   );
 
 const HorizontalCheck = (board, currentPlayer) =>
-  board.some((_r) => Object.values(_r).every((_c) => _c === currentPlayer));
+  board.some((_r) => _r.every((_c) => _c === currentPlayer));
 
-const CheckDraw = (board) =>
-  board.every((_r) => Object.values(_r).every((_c) => _c !== null));
+const CheckDraw = (board) => board.every((_r) => _r.every((_c) => _c !== null));
 
 const FindEmptyCell = (board) => {
   const randomRow = Math.floor(Math.random() * board.length);
-  const randomCell = Object.keys(board[0])[
+  const randomCell = [...board.keys()][
     Math.floor(Math.random() * board.length)
   ];
   if (board[randomRow][randomCell] === null) {
@@ -82,36 +59,34 @@ const FindEmptyCell = (board) => {
 };
 
 const DisplayBoard = (board) => {
-  Object.keys(board).forEach((_i) => {
-    console.log(
-      Object.values(board[_i])
-        .map((value) => value || "-")
-        .join(" ")
-    );
+  board.forEach((row) => {
+    console.log(row.map((value) => value || "-").join(" "));
   });
 };
 
-const RunApp = async () => {
-  STATE.currentPlayer = "X";
+const RunApp = async (dimension = 3) => {
+  let State = CreateState(dimension);
+
+  State.currentPlayer = "X";
   var i = 1;
 
-  while (STATE.winner === null && !STATE.isDraw) {
-    STATE = await (function (data, i) {
+  while (State.winner === null && !State.isDraw) {
+    State = await (function (data, i) {
       return new Promise((resolve) => {
         setTimeout(function () {
           const cell = FindEmptyCell(data.board);
           resolve(Move(data, cell));
         }, 300 * i);
       });
-    })(STATE, i++);
-    DisplayBoard(STATE.board);
+    })(State, i++);
+    DisplayBoard(State.board);
     console.log("----------");
   }
-  if (STATE.winner) {
-    console.log("WINNER => " + STATE.winner);
-  } else if (STATE.isDraw) {
+  if (State.winner) {
+    console.log("WINNER => " + State.winner);
+  } else if (State.isDraw) {
     console.log("GAME DRAW!");
   }
 };
 
-RunApp();
+RunApp(3);
